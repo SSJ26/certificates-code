@@ -14,14 +14,14 @@ def register(request):
     
     if request.method == 'POST':
 
-        form = PersonForm(request.POST)
+        form = request.POST
         print(form)
-        if form.is_valid():
-            form = form.save()
-            print(form.firstName,form.secondName,form.course,form.course+ '_' + form.firstName + form.secondName + '.pdf')
-            generate_certificate(form.firstName,form.secondName,form.course,form.course+ '_' + form.firstName + form.secondName + '.pdf')
+        # if form.is_valid():
+            # form = form.save()
+        print(form['firstName'],form['secondName'],form['course'],form['course']+ '_' + form['firstName'] + form['secondName'] + '.pdf')
+        generate_certificate(form['firstName'],form['secondName'],form['course'],form['course']+ '_' + form['firstName'] + form['secondName'] + '.pdf')
 
-            return render(request, 'download.html', {'data': form,'pdf':form.course+ '_' + form.firstName + form.secondName + '.pdf'})
+        return render(request, 'download.html', {'data': form,'pdf':form['course']+ '_' + form['firstName'] + form['secondName'] + '.pdf'})
         # else:
         #     return HttpResponse('Your Form is wrong')
 
